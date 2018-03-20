@@ -12,11 +12,11 @@ import com.revature.hydra.associate.controller.AssociateController;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@EnableJpaRepositories("com.revature.hydra.client.data")
+@EnableJpaRepositories("com.revature.hydra.associate.data")
 @SpringBootApplication
 @Configuration
 @EnableSwagger2
-@ComponentScan(basePackages = {"com.revature.hydra.client.controller", "com.revature.hydra.client.service"})
+@ComponentScan(basePackages = {"com.revature.hydra.associate.controller", "com.revature.hydra.associate.service"})
 @EntityScan("com.revature.beans")
 public class AssociateRepositoryServiceApplication {
 	/*@Autowired

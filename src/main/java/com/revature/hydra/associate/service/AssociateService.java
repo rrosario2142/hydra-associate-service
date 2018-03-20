@@ -34,7 +34,7 @@ public class AssociateService {
 	 * @param associate - associate to update
 	 */
 	public void update(Associate associate) {
-		save(associate);
+		associateRepository.save(associate);
 	}
 
 	/**
