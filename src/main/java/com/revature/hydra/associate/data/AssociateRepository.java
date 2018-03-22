@@ -21,12 +21,37 @@ public interface AssociateRepository extends JpaRepository<Associate, Integer> {
 	 * @return Associate
 	 */
 	Associate findOneByAssociateId(Integer associateId);
-
+	
 	/**
-	 * Find all associates.
+	 * Find associates by clientId.
 	 * 
-	 * @return List of associates
+	 * @param clientId
+	 * @return List<Associate>
 	 */
-	List<Associate> findAll();
+	List<Associate> findAllByClientId(Integer clientId);
+	
+	/**
+	 * Find all associates by marketingStatusId.
+	 * 
+	 * @param marketingStatusId
+	 * @return List<Associate>
+	 */
+	List<Associate> findAllByMarketingStatusId(Integer marketingStatusId);
+	
+	/**
+	 * Find all associates by endClientId.
+	 * 
+	 * @param endClientId
+	 * @return List<Associate>
+	 */
+	List<Associate> findAllByEndClientId(Integer endClientId);
+	
+	/**
+	 * Find all associates by batchId.
+	 * 
+	 * @param batchId
+	 * @return List<Associate>
+	 */
+	List<Associate> findAllByBatchId(Integer batchId);
 
 }

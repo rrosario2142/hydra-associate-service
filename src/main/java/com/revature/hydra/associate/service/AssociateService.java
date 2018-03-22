@@ -11,7 +11,7 @@ import com.revature.hydra.associate.data.AssociateRepository;
 /**
  * associateService
  * 
- * associate services implementation with communication with associateRepository
+ * associate services implementation with communication with AssociateRepository
  */
 @Service
 public class AssociateService {
@@ -20,7 +20,7 @@ public class AssociateService {
 	private AssociateRepository associateRepository;
 
 	/**
-	 * Saving a associate
+	 * Saving an associate
 	 * 
 	 * @param associate - associate to save
 	 */
@@ -29,18 +29,18 @@ public class AssociateService {
 	}
 
 	/**
-	 * Update a associate
+	 * Update an associate
 	 * 
-	 * @param associate - associate to update
+	 * @param associate
 	 */
 	public void update(Associate associate) {
 		associateRepository.save(associate);
 	}
 
 	/**
-	 * Delete a associate
+	 * Delete an associate
 	 * 
-	 * @param associate - associate to delete
+	 * @param associate
 	 */
 	public void delete(Associate associate) {
 		associateRepository.delete(associate.getAssociateId());
@@ -49,23 +49,60 @@ public class AssociateService {
 	/**
 	 * Obtain list of all associates from associateRepository.
 	 * 
-	 * @return List<associate> - List of associates
+	 * @return List<Associate> - List of associates
 	 */
 	public List<Associate> findAll() {
 		return associateRepository.findAll();
 	}
 
 	/**
-	 * Obtain a associate from associateRepository with given associateId.
+	 * Obtain an associate with given associateId.
 	 * 
 	 * @param associateId
-	 * @return associate - The associate object with given associateId
+	 * @return Associate
 	 */
-	public Associate findOneById(Integer associateId) {
-		//These two methods exist by default in the repository, should have the same function.
-		//return associateRepository.getOne(associateId);
-		//return associateRepository.findOne(associateId);
+	public Associate findOneByAssociateId(Integer associateId) {
 		return associateRepository.findOneByAssociateId(associateId);
+	}
+	
+	/**
+	 * Obtain list of all associates by marketingStatusId.
+	 * 
+	 * @param marketingStatusId
+	 * @return List<Associate>
+	 */
+	public List<Associate> findAllByMarketingStatusId(Integer marketingStatusId) {
+		return associateRepository.findAllByMarketingStatusId(marketingStatusId);
+	}
+	
+	/**
+	 * Obtain list of all associates by clientId.
+	 * 
+	 * @param clientId
+	 * @return List<Associate>
+	 */
+	public List<Associate> findAllByClientId(Integer clientId) {
+		return associateRepository.findAllByClientId(clientId);
+	}
+	
+	/**
+	 * Obtain list of all associates by endClientId.
+	 * 
+	 * @param endClientId
+	 * @return List<associate> - List of associates
+	 */
+	public List<Associate> findAllByEndClientId(Integer endClientId) {
+		return associateRepository.findAllByEndClientId(endClientId);
+	}
+	
+	/**
+	 * Obtain list of all associates by batchId.
+	 * 
+	 * @param batchId
+	 * @return List<Associate> - List of associates
+	 */
+	public List<Associate> findAllByBatchId(Integer batchId) {
+		return associateRepository.findAllByBatchId(batchId);
 	}
 }
 	

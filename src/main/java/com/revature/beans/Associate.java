@@ -19,33 +19,58 @@ import org.springframework.stereotype.Component;
 @Cacheable
 public class Associate implements Serializable {
 	private static final long serialVersionUID = 167119711242064698L;
-
+	
+	/**
+	 * associatedId: unique associate identifier
+	 */
 	@Id
 	@Column(name = "ASSOCIATE_ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLIENT_ID_SEQUENCE")
 	@SequenceGenerator(name = "CLIENT_ID_SEQUENCE", sequenceName = "CLIENT_ID_SEQUENCE")
 	private Integer associateId;
 	
+	/**
+	 * Associate's first name
+	 */
 	@NotEmpty
 	@Column(name = "ASSOCIATE_FIRST_NAME")
 	private String associateFirstName;
 	
+	/**
+	 * Associate's last name
+	 */
 	@NotEmpty
 	@Column(name = "ASSOCIATE_LAST_NAME")
 	private String associateLastName;
 	
+	/**
+	 * marketingStatusId: unique associate identifier
+	 * @ManyToOne JoinColumn()
+	 */
 	@NotEmpty
 	@Column(name = "MARKETING_STATUS_ID")
 	private Integer marketingStatusId;
 	
+	/**
+	 * clientId: unique associate identifier
+	 * @ManyToOne JoinColumn()
+	 */
 	@NotEmpty
 	@Column(name = "CLIENT_ID")
 	private Integer clientId;
 	
+	/**
+	 * endClientId: unique associate identifier
+	 * @ManyToOne JoinColumn()
+	 */
 	@NotEmpty
 	@Column(name = "END_CLIENT_ID")
 	private Integer endClientId;
 	
+	/**
+	 * batchId: unique associate identifier
+	 * @ManyToOne JoinColumn()
+	 */
 	@NotEmpty
 	@Column(name = "BATCH_ID")
 	private Integer batchId;
