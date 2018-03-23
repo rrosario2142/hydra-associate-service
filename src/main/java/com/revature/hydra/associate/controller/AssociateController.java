@@ -134,7 +134,7 @@ public class AssociateController {
    	 * @consumes APPLICATION_JSON_VALUE
    	 */
 	@RequestMapping(value = "/associate/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> updatePlacement(@Valid @RequestBody Associate associate) {
+	public ResponseEntity<Void> updateAssociate(@Valid @RequestBody Associate associate) {
 		log.info("Update associate by associateId: " + associate);
 		associateService.update(associate);
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -145,7 +145,7 @@ public class AssociateController {
    	 * 
    	 */
 	@RequestMapping(value = "/associate/delete/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> deletePlacement(@PathVariable Integer id) {
+	public ResponseEntity<Void> deleteAssociate(@PathVariable Integer id) {
 		Associate associate = new Associate();
 		associate.setAssociateId(id);
 		log.info("Delete associate by associateId: " + id);
