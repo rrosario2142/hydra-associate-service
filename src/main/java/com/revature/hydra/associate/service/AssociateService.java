@@ -15,7 +15,6 @@ import com.revature.hydra.associate.data.AssociateRepository;
  */
 @Service
 public class AssociateService {
-
 	@Autowired
 	private AssociateRepository associateRepository;
 

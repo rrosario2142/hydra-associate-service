@@ -1,6 +1,8 @@
 package com.revature.hydra.associate;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -29,45 +31,53 @@ public class AssociateRepositoryTests {
 	@Before
 	public void init() {
 		log.info("Initializing an associate object for testing.");
-		testAssociate = new Associate(1000, "Test", "Tester", 10101, 20202, 30303, 40404);
+		testAssociate = new Associate(10101, "Test", "Tester", 20202, 30303, 40404, 50505);
 		test.save(testAssociate);
 	}
 
 	@After
 	public void teardown() {
-		log.info("Delete test associate object");
+		log.info("Remove test associate from db");
 		if (test.findOneByAssociateId(testAssociate.getAssociateId()) != null) {
 			test.delete(testAssociate);
 		}
 	}
 	
 	@Test
-	public void TestfindAllByAssociateId() {
-		log.info("fineOneByAssociateId() test");
+	public void TestfindOneByAssociateId() {
+		log.info("findOneByAssociateId() test");
 		Associate associate = test.findOneByAssociateId(10101);
-		assertNotNull(associate);
-	}
-	
-	@Test
-	public void TestfindAllByClientId() {
-		log.info("fineOneByClientId() test");
-		Associate associate = test.findOneByAssociateId(1);
 		assertNotNull(associate);
 	}
 
 	@Test
 	public void TestfindAllByMarketingStatusId() {
-		log.info("fineOneByClientId() test");
-		Associate associate = test.findOneByAssociateId(1);
-		assertNotNull(associate);
+		log.info("findAllByMarketingStatusId() test");
+		List<Associate> associates = test.findAllByMarketingStatusId(30303);
+		assertNotNull(associates);
+	}
+	
+	@Test
+	public void TestfindAllByClientId() {
+		log.info("findAllByClientId() test");
+		List<Associate> associates = test.findAllByClientId(30303);
+		assertNotNull(associates);
 	}
 	
 	@Test
 	public void TestfindAllByEndClientId() {
-		log.info("fineOneByClientId() test");
-		Associate associate = test.findOneByAssociateId(1);
-		assertNotNull(associate);
+		log.info("findAllByEndClientId() test");
+		List<Associate> associates = test.findAllByEndClientId(40404);
+		assertNotNull(associates);
 	}
+	
+	@Test
+	public void TestfindAllByBatchId() {
+		log.info("findAllByBatchId() test");
+		List<Associate> associates = test.findAllByBatchId(50505);
+		assertNotNull(associates);
+	}
+	
 	@Test
 	public void TestfindAll() {
 		log.info("findAll() test.");
@@ -75,12 +85,19 @@ public class AssociateRepositoryTests {
 		assertNotNull(associates);
 	}
 	
-	//@Test
-//	public void addPlacement() {
-//		log.info("Test adding a placement.");
-//		testPlacement = new Placement(1001, new Timestamp(100_000), new Timestamp(200_000), 5510, 5510, 5503);
-//		Placement savedPlacement = placementRepository.save(testPlacement);
-//
-//		assertTrue(placementRepository.findAll().contains(savedPlacement));
-//	}
+	@Test
+	public void TestaddAssociate() {
+		log.info("Adding associate test.");
+		testAssociate = new Associate(1111, "NewTest", "NewerTester", 2222, 3333, 4444, 5555);
+		test.save(testAssociate);
+		assertTrue(test.findAll().contains(testAssociate));
+	}
+	
+	@Test
+	public void TestUpdateAssociate() {
+		log.info("Updating associate test.");
+		testAssociate.setClientId(30305);
+		Associate updatedAssociate = test.save(testAssociate);
+		assertEquals(updatedAssociate.getClientId(), testAssociate.getClientId());
+	}
 }

@@ -3,14 +3,16 @@ package com.revature.hydra.associate.application;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-
-import com.revature.hydra.associate.controller.AssociateController;
-
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+/**
+ * Associate microservice
+ * @author RRosario
+ * 
+ */
 
 @EnableJpaRepositories("com.revature.hydra.associate.data")
 @SpringBootApplication

@@ -44,34 +44,30 @@ public class Associate implements Serializable {
 	private String associateLastName;
 	
 	/**
-	 * marketingStatusId: unique associate identifier
+	 * marketingStatusId: marketing status of associate
 	 * @ManyToOne JoinColumn()
 	 */
-	@NotEmpty
 	@Column(name = "MARKETING_STATUS_ID")
 	private Integer marketingStatusId;
 	
 	/**
-	 * clientId: unique associate identifier
+	 * clientId: client of associate
 	 * @ManyToOne JoinColumn()
 	 */
-	@NotEmpty
 	@Column(name = "CLIENT_ID")
 	private Integer clientId;
 	
 	/**
-	 * endClientId: unique associate identifier
+	 * endClientId: end client of associate
 	 * @ManyToOne JoinColumn()
 	 */
-	@NotEmpty
 	@Column(name = "END_CLIENT_ID")
 	private Integer endClientId;
 	
 	/**
-	 * batchId: unique associate identifier
+	 * batchId: training batch identifier of associate
 	 * @ManyToOne JoinColumn()
 	 */
-	@NotEmpty
 	@Column(name = "BATCH_ID")
 	private Integer batchId;
 	
