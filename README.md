@@ -14,11 +14,11 @@ Fields (columns) of associate table (CALIBER_ASSOCIATE):
 AssociateController methods and endpoints:
 
 * findOneByAssociateId(@PathVariable Integer id); GET; endpoint: /one/associate/{id}
-	* findAll(); GET; endpoint: /all/associate
-	* findAllByMarketingStatusId(@PathVariable Integer id); GET; endpoint: /all/associate/marketingStatus/{id}
-	* findAllByClientId(@PathVariable Integer id); GET; endpoint: /all/associate/client/{id}
-	* findAllByEndClientId(@PathVariable Integer id); GET; endpoint: /all/associate/endClient/{id}
-	* findAllByBatchId(@PathVariable Integer id); GET; endpoint: /all/associate/batch/{id}
-	* addAssociate(@Valid @RequestBody Associate associate); POST; endpoint: /associate/add
-	* updateAssociate(@Valid @RequestBody Associate associate); PUT; endpoint: /associate/update
-	* deleteAssociate(@PathVariable Integer id); DELETE; endpoint: /associate/delete/{id}
+* findAll(); GET; endpoint: /all/associate
+* findAllByMarketingStatusId(@PathVariable Integer id); GET; endpoint: /all/associate/marketingStatus/{id}
+* findAllByClientId(@PathVariable Integer id); GET; endpoint: /all/associate/client/{id}
+* findAllByEndClientId(@PathVariable Integer id); GET; endpoint: /all/associate/endClient/{id}
+* findAllByBatchId(@PathVariable Integer id); GET; endpoint: /all/associate/batch/{id}
+* addAssociate(@Valid @RequestBody Associate associate); POST; endpoint: /associate/add
+* updateAssociate(@Valid @RequestBody Associate associate); PUT; endpoint: /associate/update
+* deleteAssociate(@PathVariable Integer id); DELETE; endpoint: /associate/delete/{id}
