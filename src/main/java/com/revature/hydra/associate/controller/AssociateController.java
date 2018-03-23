@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Associate;
-import com.revature.hydra.associate.AssociateRepositoryTests;
+//import com.revature.hydra.associate.AssociateRepositoryTests;
 import com.revature.hydra.associate.service.AssociateService;
 
 @RestController
