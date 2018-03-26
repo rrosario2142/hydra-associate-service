@@ -54,35 +54,35 @@ public class AssociateRepositoryTests {
 	@Test
 	public void TestfindOneByAssociateId() {
 		log.info("findOneByAssociateId() test");
-		Associate associate = test.findOneByAssociateId(1);
+		Associate associate = test.findOneByAssociateId(215);
 		assertNotNull(associate);
 	}
 
 	@Test
 	public void TestfindAllByMarketingStatusId() {
 		log.info("findAllByMarketingStatusId() test");
-		List<Associate> associates = test.findAllByMarketingStatusId(22);
+		List<Associate> associates = test.findAllByMarketingStatusId(7);
 		assertNotNull(associates);
 	}
 	
 	@Test
 	public void TestfindAllByClientId() {
 		log.info("findAllByClientId() test");
-		List<Associate> associates = test.findAllByClientId(33);
+		List<Associate> associates = test.findAllByClientId(30303);
 		assertNotNull(associates);
 	}
 	
 	@Test
 	public void TestfindAllByEndClientId() {
 		log.info("findAllByEndClientId() test");
-		List<Associate> associates = test.findAllByEndClientId(44);
+		List<Associate> associates = test.findAllByEndClientId(40404);
 		assertNotNull(associates);
 	}
 	
 	@Test
 	public void TestfindAllByBatchId() {
 		log.info("findAllByBatchId() test");
-		List<Associate> associates = test.findAllByBatchId(55);
+		List<Associate> associates = test.findAllByBatchId(32);
 		assertNotNull(associates);
 	}
 	
