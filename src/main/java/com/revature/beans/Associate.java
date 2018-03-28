@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
-//Caliber_Associate
+
 @Entity
 @Table(name = "TF_ASSOCIATE")
 @Cacheable
