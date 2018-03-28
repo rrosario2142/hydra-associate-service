@@ -124,9 +124,7 @@ public class AssociateControllerTest {
 	public void TestfindAllAssociates() throws Exception {
         mockMvc.perform(get("/all/associate"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(jsonPath("$[0].associateFirstName", is("Test")))
-                .andExpect(jsonPath("$[0].associateLastName", is("Test")));
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE));
     }
 /*	
 	@Test

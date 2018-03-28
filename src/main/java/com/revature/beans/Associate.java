@@ -15,7 +15,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 //Caliber_Associate
 @Entity
-@Table(name = "CALIBER_ASSOCIATE")
+@Table(name = "TF_ASSOCIATE")
 @Cacheable
 public class Associate implements Serializable {
 	private static final long serialVersionUID = 167119711242064698L;
@@ -25,8 +25,8 @@ public class Associate implements Serializable {
 	 */
 	@Id
 	@Column(name = "ASSOCIATE_ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLIENT_ID_SEQUENCE")
-	@SequenceGenerator(name = "CLIENT_ID_SEQUENCE", sequenceName = "CLIENT_ID_SEQUENCE")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ASSOCIATE_ID_SEQUENCE")
+	@SequenceGenerator(name = "ASSOCIATE_ID_SEQUENCE", sequenceName = "ASSOCIATE_ID_SEQUENCE", initialValue = 0)
 	private Integer associateId;
 	
 	/**
@@ -44,11 +44,11 @@ public class Associate implements Serializable {
 	private String associateLastName;
 	
 	/**
-	 * marketingStatusId: marketing status of associate
+	 * batchId: training batch identifier of associate
 	 * @ManyToOne JoinColumn()
 	 */
-	@Column(name = "MARKETING_STATUS_ID")
-	private Integer marketingStatusId;
+	@Column(name = "BATCH_ID")
+	private Integer batchId;
 	
 	/**
 	 * clientId: client of associate
@@ -65,11 +65,11 @@ public class Associate implements Serializable {
 	private Integer endClientId;
 	
 	/**
-	 * batchId: training batch identifier of associate
+	 * marketingStatusId: marketing status of associate
 	 * @ManyToOne JoinColumn()
 	 */
-	@Column(name = "BATCH_ID")
-	private Integer batchId;
+	@Column(name = "MARKETING_STATUS_ID")
+	private Integer marketingStatusId;
 	
 	public Associate() {
 		super();
@@ -209,7 +209,7 @@ public class Associate implements Serializable {
 	@Override
 	public String toString() {
 		return "Associate [associateId=" + associateId + ", associateFirstName=" + associateFirstName
-				+ ", associateLastName=" + associateLastName + ", marketingStatusId=" + marketingStatusId
-				+ ", clientId=" + clientId + ", endClientId=" + endClientId + ", batchId=" + batchId + "]";
+				+ ", associateLastName=" + associateLastName + ", batchId=" + batchId
+				+ ", clientId=" + clientId + ", endClientId=" + endClientId + ", marketingStatusId=" + marketingStatusId + "]";
 	}
 }
