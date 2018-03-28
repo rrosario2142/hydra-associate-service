@@ -4,15 +4,14 @@ import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -32,7 +31,6 @@ import com.revature.hydra.associate.data.AssociateRepository;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AssociateRepositoryServiceApplication.class)
 @WebAppConfiguration
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AssociateControllerTest {
 	
 	@Autowired
@@ -52,7 +50,7 @@ public class AssociateControllerTest {
 	@Autowired
 	private AssociateRepository test;
 	private MockMvc mockMvc;
-	private Associate testAssociate;
+	private Associate testAssociate, addAssociate;
 
 	@Before
 	public void setUp() throws Exception {
@@ -126,15 +124,39 @@ public class AssociateControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE));
     }
-/*	
+	
+	@Test
+	public void TestaddAssociate() throws Exception {
+		addAssociate = new Associate();
+		addAssociate.setAssociateFirstName("ADD TEST");
+		addAssociate.setAssociateLastName("ADD TEST");
+		this.mockMvc.perform(post("/associate/add")
+					.content(this.json(addAssociate))
+					.contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+					.andExpect(status().isOk());
+	}
+
 	@Test
 	public void TestupdateAssociate() throws Exception {
 		testAssociate = test.findOne(testAssociate.getAssociateId());
 		testAssociate.setAssociateFirstName("UPDATE TEST");
 		this.mockMvc.perform(put("/associate/update")
-					.content(this.json(this.testAssociate))
-					.contentType(this.mediaTypeJson))
+					.content(this.json(testAssociate))
+					.contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 					.andExpect(status().isOk());
 	}
-*/
+	
+	@Test
+	public void TestdeleteAssociate() throws Exception {
+		this.mockMvc.perform(delete("/associate/delete/" + testAssociate.getAssociateId()))
+					.andExpect(status().isOk());
+	}
+	
+	protected String json(Object obj) throws IOException {
+		MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
+		mappingJackson2HttpMessageConverter.write(obj, MediaType.APPLICATION_JSON, mockHttpOutputMessage);
+		return mockHttpOutputMessage.getBodyAsString();
+	}
+
+
 }
