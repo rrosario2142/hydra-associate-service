@@ -4,7 +4,10 @@ import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import java.util.Arrays;
+
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -13,6 +16,9 @@ import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.mock.http.MockHttpOutputMessage;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -31,6 +37,17 @@ public class AssociateControllerTest {
 	
 	@Autowired
     private WebApplicationContext webApplicationContext;
+	private HttpMessageConverter mappingJackson2HttpMessageConverter;
+	
+	@Autowired
+	void setConverters(HttpMessageConverter<?>[] converters) {
+		this.mappingJackson2HttpMessageConverter = Arrays.asList(converters).stream()
+					.filter(hmc -> hmc instanceof MappingJackson2HttpMessageConverter)
+					.findAny()
+					.orElse(null);
+		
+		Assert.assertNotNull("the JSON message converter must not be null", this.mappingJackson2HttpMessageConverter);
+	}
 	
 	@Autowired
 	private AssociateRepository test;
@@ -39,9 +56,8 @@ public class AssociateControllerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 		testAssociate = new Associate();
-		testAssociate.setAssociateId(10101);
 		testAssociate.setAssociateFirstName("Test");
 		testAssociate.setAssociateLastName("Test");
 		testAssociate.setMarketingStatusId(20202);
@@ -64,37 +80,31 @@ public class AssociateControllerTest {
 		mockMvc.perform(get("/one/associate/" + testAssociate.getAssociateId()))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-				.andExpect(jsonPath("$.associateId", is(testAssociate.getAssociateId())))
 				.andExpect(jsonPath("$.associateFirstName", is(testAssociate.getAssociateFirstName())))
 				.andExpect(jsonPath("$.associateLastName", is(testAssociate.getAssociateLastName())));
 	}
 	
 	@Test
 	public void TestfindAllByMarketingStatusId() throws Exception {
-        mockMvc.perform(get("/all/associate/marketingStatus/7"))
+        mockMvc.perform(get("/all/associate/marketingStatus/" + testAssociate.getMarketingStatusId()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(jsonPath("$[0].associateId", is(212)))
-                .andExpect(jsonPath("$[0].associateFirstName", is("Christopher")))
-                .andExpect(jsonPath("$[0].associateLastName", is("Oler")))
-                .andExpect(jsonPath("$[1].associateId", is(213)))
-                .andExpect(jsonPath("$[1].associateFirstName", is("Emile")))
-                .andExpect(jsonPath("$[1].associateLastName", is("Paul")));
+                .andExpect(jsonPath("$[0].associateFirstName", is(testAssociate.getAssociateFirstName())))
+                .andExpect(jsonPath("$[0].associateLastName", is(testAssociate.getAssociateLastName())));
     }
 	
 	@Test
 	public void TestfindAllByClientId() throws Exception {
-        mockMvc.perform(get("/all/associate/client/1"))
+        mockMvc.perform(get("/all/associate/client/" + testAssociate.getClientId()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(jsonPath("$[0].associateId", is(233)))
-                .andExpect(jsonPath("$[0].associateFirstName", is("Peter")))
-                .andExpect(jsonPath("$[0].associateLastName", is("Thompson")));
+                .andExpect(jsonPath("$[0].associateFirstName", is("Test")))
+                .andExpect(jsonPath("$[0].associateLastName", is("Test")));
     }
 	
 	@Test
 	public void TestfindAllByEndClientId() throws Exception {
-        mockMvc.perform(get("/all/associate/endClient/40404"))
+        mockMvc.perform(get("/all/associate/endClient/" + testAssociate.getEndClientId()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$[0].associateFirstName", is("Test")))
@@ -103,15 +113,11 @@ public class AssociateControllerTest {
 	
 	@Test
 	public void TestfindAllByBatchId() throws Exception {
-        mockMvc.perform(get("/all/associate/batch/36"))
+        mockMvc.perform(get("/all/associate/batch/" + testAssociate.getBatchId()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(jsonPath("$[0].associateId", is(231)))
-                .andExpect(jsonPath("$[0].associateFirstName", is("Hunter")))
-                .andExpect(jsonPath("$[0].associateLastName", is("Heard")))
-                .andExpect(jsonPath("$[1].associateId", is(232)))
-                .andExpect(jsonPath("$[1].associateFirstName", is("Daniel")))
-                .andExpect(jsonPath("$[1].associateLastName", is("Kaczmarczyk")));
+                .andExpect(jsonPath("$[0].associateFirstName", is("Test")))
+                .andExpect(jsonPath("$[0].associateLastName", is("Test")));
     }
 	
 	@Test
@@ -122,5 +128,15 @@ public class AssociateControllerTest {
                 .andExpect(jsonPath("$[0].associateFirstName", is("Test")))
                 .andExpect(jsonPath("$[0].associateLastName", is("Test")));
     }
-
+/*	
+	@Test
+	public void TestupdateAssociate() throws Exception {
+		testAssociate = test.findOne(testAssociate.getAssociateId());
+		testAssociate.setAssociateFirstName("UPDATE TEST");
+		this.mockMvc.perform(put("/associate/update")
+					.content(this.json(this.testAssociate))
+					.contentType(this.mediaTypeJson))
+					.andExpect(status().isOk());
+	}
+*/
 }
