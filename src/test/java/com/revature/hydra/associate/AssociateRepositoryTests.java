@@ -20,6 +20,12 @@ import com.revature.beans.Associate;
 import com.revature.hydra.associate.application.AssociateRepositoryServiceApplication;
 import com.revature.hydra.associate.data.AssociateRepository;
 
+/**
+ * 
+ * @author RRosario
+ * Associate Repository tests
+ * 
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = AssociateRepositoryServiceApplication.class)
 public class AssociateRepositoryTests {
@@ -28,7 +34,10 @@ public class AssociateRepositoryTests {
 	@Autowired
 	AssociateRepository test;
 	Associate testAssociate;
-
+	
+	/**
+	 * Associate object creation to be used for each test case.
+	 */
 	@Before
 	public void init() {
 		log.info("Initializing an associate object for testing.");
@@ -43,6 +52,9 @@ public class AssociateRepositoryTests {
 		test.save(testAssociate);
 	}
 
+	/**
+	 * Associate object deletion after each test case
+	 */
 	@After
 	public void teardown() {
 		log.info("Remove test associate from db");
@@ -51,6 +63,9 @@ public class AssociateRepositoryTests {
 		}
 	}
 	
+	/**
+	 * Test for finding an associate by associateId
+	 */
 	@Test
 	public void TestfindOneByAssociateId() {
 		log.info("findOneByAssociateId() test");
@@ -58,6 +73,9 @@ public class AssociateRepositoryTests {
 		assertNotNull(associate);
 	}
 
+	/**
+	 * Test for finding all by marketingStatusId
+	 */
 	@Test
 	public void TestfindAllByMarketingStatusId() {
 		log.info("findAllByMarketingStatusId() test");
@@ -65,6 +83,9 @@ public class AssociateRepositoryTests {
 		assertNotNull(associates);
 	}
 	
+	/**
+	 * Test for finding associates by clientId
+	 */
 	@Test
 	public void TestfindAllByClientId() {
 		log.info("findAllByClientId() test");
@@ -72,6 +93,9 @@ public class AssociateRepositoryTests {
 		assertNotNull(associates);
 	}
 	
+	/**
+	 * Test for finding associates by endClientId
+	 */
 	@Test
 	public void TestfindAllByEndClientId() {
 		log.info("findAllByEndClientId() test");
@@ -79,6 +103,9 @@ public class AssociateRepositoryTests {
 		assertNotNull(associates);
 	}
 	
+	/**
+	 * Test for finding associates by batchId
+	 */
 	@Test
 	public void TestfindAllByBatchId() {
 		log.info("findAllByBatchId() test");
@@ -86,6 +113,9 @@ public class AssociateRepositoryTests {
 		assertNotNull(associates);
 	}
 	
+	/**
+	 * Test for finding all associates
+	 */
 	@Test
 	public void TestfindAll() {
 		log.info("findAll() test.");
@@ -93,6 +123,9 @@ public class AssociateRepositoryTests {
 		assertNotNull(associates);
 	}
 	
+	/**
+	 * Test for adding an associate
+	 */
 	@Test
 	public void TestaddAssociate() {
 		log.info("addAssociate() test");
@@ -100,6 +133,9 @@ public class AssociateRepositoryTests {
 		assertTrue(test.findAll().contains(testAssociate));
 	}
 	
+	/**
+	 * Test for updating an associate
+	 */
 	@Test
 	public void TestUpdateAssociate() {
 		log.info("updateAssociate() test");
@@ -108,8 +144,11 @@ public class AssociateRepositoryTests {
 		assertEquals(updatedAssociate.getEndClientId(), testAssociate.getEndClientId());
 	}
 	
+	/**
+	 * Test for deleting an associate
+	 */
 	@Test
-	public void test5DeleteInterview() {
+	public void TestDeleteAssociate() {
 		log.info("deleteAssociate() test");
 		test.delete(testAssociate);
 		assertNull(test.findOneByAssociateId(testAssociate.getAssociateId()));
